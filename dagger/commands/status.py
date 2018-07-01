@@ -6,7 +6,7 @@ from json import dumps
 from .base import Base
 
 
-class Hello(Base):
+class Status(Base):
     """Say hello, world!"""
 
     def run(self):

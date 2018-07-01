@@ -2,16 +2,23 @@
 dagger
 
 Usage:
-  dagger hello
+  dagger init
+  dagger add
+  dagger fly <path>
   dagger -h | --help
   dagger --version
 
+Arguments:
+  <path>   needs to be a directory containing .md-Files or a .md-File
+
 Options:
-  -h --help                         Show this screen.
-  --version                         Show version.
+  -h, --help        Show this screen.
+  -v, --version     Show version.
+  -p, --push        Automatically pushes latest changes.
+  -f, --force       Forces a rewrite of all scribbles in file.
 
 Examples:
-  dagger hello
+  dagger scribble.md
 
 Help:
   For help using this tool, please open an issue on the Github repository:
