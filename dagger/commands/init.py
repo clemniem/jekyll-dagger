@@ -6,6 +6,7 @@ import os
 import yaml
 
 from .base import Base
+from .utils import *
 
 TARGET = "target"
 
@@ -44,8 +45,8 @@ class Init(Base):
                 config[TARGET] = None
                 print("The provided path is not a directory.")
 
-        with open(CONFIG_FILE_PATH, 'w') as config_file:
-            yaml.dump(config, config_file, default_flow_style=False)
+        # TODO make sense with config and utils
+        saveConfig(config)
 
         print("Your config-file has been saved:")
         with open(CONFIG_FILE_PATH,'r') as config_stream:

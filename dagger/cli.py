@@ -3,8 +3,8 @@ dagger
 
 Usage:
   dagger init
-  dagger add
-  dagger fly <path>
+  dagger add <path>
+  dagger fly
   dagger -h | --help
   dagger --version
 
