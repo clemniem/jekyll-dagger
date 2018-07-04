@@ -24,5 +24,5 @@ class Target(Base):
 		# check for folder
 
 
-		print('You want to aim the dagger at:', self.options["<path>"])
+		print('You want to aim the jagger at:', self.options["<path>"])
 		print('bluubb')

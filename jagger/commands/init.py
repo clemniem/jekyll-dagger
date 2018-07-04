@@ -12,10 +12,10 @@ TARGET = "target"
 
 
 class Init(Base):
-    """Initialise the dagger"""
+    """Initialise the jagger"""
 
     def run(self):
-        print('This is the initialisation of jekyll-dagger.')
+        print('This is the initialisation of jagger.')
         print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
 
 
@@ -25,7 +25,7 @@ class Init(Base):
             print("Your $HOME environment variable isn't set. Please set it to your Home directory")
             return
 
-        CONFIG_PATH = '{}/.config/jekyll-dagger'.format(HOME)
+        CONFIG_PATH = '{}/.config/jagger'.format(HOME)
 
         if not os.path.exists(CONFIG_PATH):
             print("Creating directory for the configuration: {}".format(CONFIG_PATH))

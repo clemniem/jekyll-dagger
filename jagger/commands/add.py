@@ -9,7 +9,7 @@ class Hello(Base):
     """Say hello, world!"""
 
     def run(self):
-        print('This adds a file or directory to dagger config')
+        print('This adds a file or directory to jagger config')
         print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
         target = self.options['<path>']
         target = os.path.abspath(target)

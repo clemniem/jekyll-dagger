@@ -7,7 +7,7 @@ from subprocess import call
 
 from setuptools import Command, find_packages, setup
 
-from dagger import __version__
+from jagger import __version__
 
 
 this_dir = abspath(dirname(__file__))
@@ -28,16 +28,16 @@ class RunTests(Command):
 
     def run(self):
         """Run all tests!"""
-        errno = call(['py.test', '--cov=dagger', '--cov-report=term-missing'])
+        errno = call(['py.test', '--cov=jagger', '--cov-report=term-missing'])
         raise SystemExit(errno)
 
 
 setup(
-    name = 'dagger',
+    name = 'jagger',
     version = __version__,
     description = 'A jekyll tagger command line program in Python.',
     long_description = long_description,
-    url = 'https://github.com/clemniem/jekyll-dagger',
+    url = 'https://github.com/clemniem/jagger',
     author = 'Clemens Niemeyer',
     author_email = 'clemniem@gmail.com',
     license = 'MIT',
@@ -63,7 +63,7 @@ setup(
     },
     entry_points = {
         'console_scripts': [
-            'dagger=dagger.cli:main',
+            'jagger=jagger.cli:main',
         ],
     },
     cmdclass = {'test': RunTests},

@@ -6,7 +6,7 @@ from .base import Base
 import os
 
 class Fly(Base):
-    """Dagging the scribble"""
+    """Jagging the scribble"""
 
     def fly(self,inputPath):
         # TODO Move to config file.
