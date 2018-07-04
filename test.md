@@ -8,8 +8,10 @@
 
 Here are the steps listed how to setup jekyll-dagger
 
-```
-pip install TODO
+```sh
+# activate venv
+cd jekyll-dagger
+pip install -e .[test]
 ```
 
 ### h3 Another Section
