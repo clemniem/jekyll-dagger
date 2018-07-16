@@ -3,8 +3,9 @@ jagger
 
 Usage:
   jagger init
+  jagger status
   jagger add <path>
-  jagger fly
+  jagger fly <md-resource>
   jagger -h | --help
   jagger --version
 

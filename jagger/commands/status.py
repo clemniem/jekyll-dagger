@@ -4,6 +4,7 @@
 from json import dumps
 
 from .base import Base
+from .utils import safeLoadConfig
 
 
 class Status(Base):
@@ -12,3 +13,5 @@ class Status(Base):
     def run(self):
         print('Hell, world!')
         print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
+
+        print(safeLoadConfig())

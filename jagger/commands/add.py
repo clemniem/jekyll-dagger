@@ -24,6 +24,7 @@ class Hello(Base):
             if not "directories" in config: config["directories"] = dict()
             config["directories"][target] = None
         elif os.path.isfile(target):
+            # TODO check if File is a md File
             if not "files" in config: config["files"] = dict()
             config["files"][target] = None
 
