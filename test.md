@@ -14,7 +14,7 @@ cd jekyll-dagger
 pip install -e .[test]
 ```
 
-### h3 Another Section
+### h3 Another/Section
 > tag1 tag2 tag3
 
 #### h4 Deeper Leveling is not affected

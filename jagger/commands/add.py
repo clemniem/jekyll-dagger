@@ -1,7 +1,6 @@
 """The hello command."""
 
 
-from json import dumps
 from .base import Base
 from .utils import *
 
@@ -19,16 +18,23 @@ class Hello(Base):
             exit(-1)
 
         config = safeLoadConfig()
+        changed_config = False
 
         if os.path.isdir(target):
-            if not "directories" in config: config["directories"] = dict()
-            config["directories"][target] = None
+            if not JAGGER_DIRS in config: config[JAGGER_DIRS] = dict()
+            if not target in config[JAGGER_DIRS]:
+                config[JAGGER_DIRS][target] = None
+                changed_config = True
         elif os.path.isfile(target):
             # TODO check if File is a md File
-            if not "files" in config: config["files"] = dict()
-            config["files"][target] = None
+            if not JAGGER_FILES in config: config[JAGGER_FILES] = dict()
+            if not target in config[JAGGER_FILES]:
+                config[JAGGER_FILES][target] = None
+                changed_config = True
 
-        saveConfig(config)
-
-        print("config has been updated")
-        print(safeLoadConfig())
+        if changed_config:
+            saveConfig(config)
+            print("config has been updated")
+            printDict(safeLoadConfig())
+        else:
+            print("File is already in config.")

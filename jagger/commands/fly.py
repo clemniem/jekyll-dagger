@@ -14,17 +14,17 @@ class Fly(Base):
         print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
 
         resource = self.options['<md-resource>']
-        files = list()
+        files_to_jagger = list()
         if os.path.isdir(resource):
-            files = [f for f in os.listdir(resource) if assertMdFile(f)]
+            files_to_jagger = [f for f in os.listdir(resource) if assertMdFile(f)]
         elif assertMdFile(resource):
-            files.append(resource)
-        if not files:
+            files_to_jagger.append(resource)
+        if not files_to_jagger:
             print("The path provided is not pointing to a valid md-File: {}".format(resource))
             exit(-1)
-        print(files)
+        print(files_to_jagger)
 
-        for file in files:
-            jaggerFile(file)
+        for file_path in files_to_jagger:
+            jaggerFile(file_path)
 
 

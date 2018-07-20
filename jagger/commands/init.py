@@ -1,13 +1,8 @@
 """The init command."""
 
-
-from json import dumps
-
 from .base import Base
 from .utils import *
-
-
-
+import os
 
 class Init(Base):
     """Initialise the jagger"""
@@ -16,22 +11,23 @@ class Init(Base):
         print('This is the initialisation of jagger.')
         print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
 
-        # Where is the target directory ?
-        config = {
-            TARGET: None
-        }
+        target_dir = self.options["<target-dir>"]
 
-        # TODO get an autocomplete eg completer
-        while config[TARGET] is None:
-            config[TARGET] = input("Where is the _posts folder of your jekyll project (absolute path): ")
-            if not os.path.isdir(config[TARGET]):
-                config[TARGET] = None
-                print("The provided path is not a directory.")
+        # check if config already exists:
+        if os.path.exists(getConfigFilePath()) and not self.options["--force"]:
+            print("Config already exists:")
+            print("  If you want to overwrite target run: jagger target <new-target-path>")
+            print("  If you want to overwrite current config run: jagger init <target-path> -f")
 
-        # TODO make sense with config and utils
-        saveConfig(config)
+        if not os.path.isdir(target_dir):
+            print("The provided path is not a directory.")
+        else:
+            config = {
+                TARGET: target_dir,
+                IS_TARGET_GIT: isGitRepo(target_dir)
+            }
 
-        print("Your config-file has been saved:")
-        with open(getConfigFilePath(),'r') as config_stream:
-            loaded_config = yaml.safe_load(config_stream)
-            print(loaded_config)
+            saveConfig(config)
+
+            print("Your config-file has been saved:")
+            printDict(safeLoadConfig())

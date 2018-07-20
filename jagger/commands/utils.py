@@ -1,8 +1,13 @@
 import os
 import yaml
+import git
 from datetime import datetime
+from json import dumps
 
 TARGET = "target"
+IS_TARGET_GIT = "is_target_git"
+JAGGER_FILES = "files"
+JAGGER_DIRS = "directories"
 
 # define default structure
 DEFAULT_HEADER = """---
@@ -22,16 +27,25 @@ COMMENT = '> '
 def assertConfig():
     return os.path.exists(getConfigFilePath())
 
+
 def assertMdFile(path):
     if path.endswith("md") or path.endswith(".markdown"):
         return os.path.isfile(path)
     else:
         return False
 
+def isGitRepo(path):
+    try:
+        _ = git.Repo(path).git_dir
+        return True
+    except git.exc.InvalidGitRepositoryError:
+        return False
+
 def getOutputDir():
     config = safeLoadConfig()
     if TARGET in config:
         return config[TARGET]
+
 
 def getConfigPath():
     try:
@@ -42,6 +56,7 @@ def getConfigPath():
 
     return '{}/.config/jagger'.format(HOME)
 
+
 def getConfigFilePath():
     config_path = getConfigPath()
 
@@ -51,10 +66,11 @@ def getConfigFilePath():
 
     return config_path + "/" + "config.yml"
 
+
 def safeLoadConfig():
     content = None
     if assertConfig():
-        with open(getConfigFilePath(),'r') as config_stream:
+        with open(getConfigFilePath(), 'r') as config_stream:
             content = yaml.safe_load(config_stream)
     if content is None:
         print("Could not find config-file, please run 'jagger init' first.")
@@ -62,14 +78,24 @@ def safeLoadConfig():
     else:
         return content
 
+
 def saveConfig(config):
     with open(getConfigFilePath(), 'w') as config_file:
         yaml.dump(config, config_file, default_flow_style=False)
 
+
+def printDict(dictionary):
+    print(dumps(dictionary, indent=2, sort_keys=True))
+
+
+def sanitizeTitle(title):
+    return title.replace(" ", "-").replace("/", "-")
+
 def writeSection(title, lines, pTags, sTags):
     OUTPUT_DIR = getOutputDir()
+
     print("OutputDir={}".format(OUTPUT_DIR))
-    post_filename = "{}-{}.md".format(datetime.today().date(), title.replace(" ", "-"))
+    post_filename = "{}-{}.md".format(datetime.today().date(), sanitizeTitle(title))
     print(post_filename)
     post_path = os.path.join(OUTPUT_DIR, post_filename)
     print(post_path)
@@ -164,4 +190,3 @@ def jaggerFile(filePath):
     # write last section if there is one
     if section_tmp:
         writeSection(section_title, section_tmp, page_tags, section_tags)
-

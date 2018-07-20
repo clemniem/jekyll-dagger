@@ -6,3 +6,4 @@ from .add import *
 from .all import *
 from .push import *
 from .status import *
+from .remove import *

@@ -2,10 +2,14 @@
 jagger
 
 Usage:
-  jagger init
+  jagger init <target-dir> [-f]
+  jagger target <target-dir>
   jagger status
   jagger add <path>
   jagger fly <md-resource>
+  jagger all
+  jagger push
+  jagger remove <path>
   jagger -h | --help
   jagger --version
 

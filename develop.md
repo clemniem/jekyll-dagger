@@ -1,4 +1,4 @@
-## jagger
+# jagger
 
 ### Mindstorm
 
@@ -13,7 +13,7 @@
 - it should be able to push to the repository to update the site (e.g. `jagger push` or a flag `-p`)
 - it should be able to configure files or folders that it automatically checks for updates (e.g.`jagger add <file/folder>` and `jagger all`)
 
-### Problems/Questions
+#### Problems/Questions
 
 - what happens if section is changed later?
 - how to check if file is changed.
@@ -22,7 +22,7 @@
 - how should the tags look like
 
 
-### Layout
+#### Layout
 
 ```
 Usage:
@@ -36,6 +36,6 @@ Usage:
   jagger -v | --version
 ```
 
-### User Stories
+#### User Stories
 
 

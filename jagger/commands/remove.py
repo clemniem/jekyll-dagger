@@ -14,21 +14,23 @@ class Hello(Base):
         target = self.options['<path>']
         target = os.path.abspath(target)
 
-        if not os.path.exists(target):
-            print("The <path> provided does not exist")
-            exit(-1)
-
         config = safeLoadConfig()
+        changed_config = False
 
         if os.path.isdir(target):
-            if not JAGGER_DIRS in config: config[JAGGER_DIRS] = dict()
-            config[JAGGER_DIRS][target] = None
+            if JAGGER_DIRS in config and target in config[JAGGER_DIRS]:
+                print("Removed {}".format(target))
+                del config[JAGGER_DIRS][target]
+                changed_config = True
         elif os.path.isfile(target):
-            # TODO check if File is a md File
-            if not JAGGER_FILES in config: config[JAGGER_FILES] = dict()
-            config[JAGGER_FILES][target] = None
+            if JAGGER_FILES in config and target in config[JAGGER_FILES]:
+                print("Removed {}".format(target))
+                del config[JAGGER_FILES][target]
+                changed_config = True
 
-        saveConfig(config)
-
-        print("config has been updated")
-        print(safeLoadConfig())
+        if changed_config:
+            saveConfig(config)
+            print("config has been updated")
+            printDict(safeLoadConfig())
+        else:
+            print("Nothing to remove.")

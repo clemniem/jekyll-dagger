@@ -4,14 +4,13 @@
 from json import dumps
 
 from .base import Base
-from .utils import safeLoadConfig
-
+from .utils import safeLoadConfig, printDict
 
 class Status(Base):
     """Say hello, world!"""
 
     def run(self):
         print('Hell, world!')
-        print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
+        print('You supplied the following options:', printDict(self.options))
 
-        print(safeLoadConfig())
+        printDict(safeLoadConfig())

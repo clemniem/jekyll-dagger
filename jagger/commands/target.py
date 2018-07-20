@@ -1,28 +1,26 @@
 """The target command."""
 
-
 from json import dumps
 
 from .base import Base
 import os
+from .utils import *
+import os
 
 class Target(Base):
-	"""Write target to .config file"""
+    """Write target to .config file"""
 
-	def run(self):
+    def run(self):
+        target = self.options['<target-dir>']
 
-		target = self.options['<path>']
+        config = safeLoadConfig()
 
-		# parse input
+        if not os.path.isdir(target):
+            print("The provided path is not a directory.")
+        else:
+            config[TARGET] = target
+            config[IS_TARGET_GIT] = isGitRepo(target)
+            saveConfig(config)
 
-
-
-
-
-
-
-		# check for folder
-
-
-		print('You want to aim the jagger at:', self.options["<path>"])
-		print('bluubb')
+            print("Config has been updated")
+            printDict(safeLoadConfig())
